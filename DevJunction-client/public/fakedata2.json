@@ -1,0 +1,17 @@
+[
+    {
+        "bannerText": "Elevate your online presence with expertly crafted websites. From responsive design to seamless functionality, our skilled developers bring your digital vision to life. Let's build your success together!",
+        "category": "Web Development",
+        "bannerimg": "https://i.ibb.co/qMFQ8S4/webbanner.png"
+    },
+    {
+        "bannerText": "Boost your brand visibility, drive traffic, and skyrocket your online success. From strategic campaigns to targeted outreach, we specialize in amplifying your message across digital channels. Maximize your reach, engage your audience, and shape your digital success story!",
+        "category": "Digital Marketing",
+        "bannerimg": "https://i.ibb.co/52BPrgK/digitalmarketbanner.jpg"
+    },
+    {
+        "bannerText": "Transform ideas into visual masterpieces! Our Graphic Design wizards breathe life into your vision. From stunning logos to captivating visuals, we turn concepts into compelling designs. Elevate your brand aesthetics, stand out, and let your visuals speak volumes - craft your design journey with us!",
+        "category": "Graphics Design",
+        "bannerimg": "https://i.ibb.co/c2fm133/gaphicsbanner.jpg"
+    }      
+]
