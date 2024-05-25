@@ -60,14 +60,14 @@ const Registration = () => {
                 <form onSubmit={handleRegister}>
                     <h2 className="text-5xl mb-10 text-left font-semibold text-[#FFE72F]">Register your account</h2>
                     <h1 className="mb-4 text-lg text-white">Your Name</h1>
-                    <input className="mb-4 rounded-lg px-6 py-3 w-4/5 border border-solid border-[#0DD3FA]" type="name" name="name" id="011" placeholder="Enter name...." required/>
+                    <input className="mb-4 rounded-lg px-6 py-3 w-full border border-solid border-[#0DD3FA]" type="name" name="name" id="011" placeholder="Enter name...." required/>
                     <h1 className="mb-4 text-lg text-white">Your Photo URL</h1>
-                    <input className="mb-4 rounded-lg px-6 py-3 w-4/5 border border-solid border-[#0DD3FA]" type="name" name="photoURL" id="012" placeholder="Enter photo url...."/>
+                    <input className="mb-4 rounded-lg px-6 py-3 w-full border border-solid border-[#0DD3FA]" type="name" name="photoURL" id="012" placeholder="Enter photo url...."/>
                     <h1 className="mb-4 text-lg text-white">Your Email</h1>
-                    <input className="mb-4 rounded-lg px-6 py-3 w-4/5 border border-solid border-[#0DD3FA]" type="email" name="email" id="1" placeholder="Enter email..." required/>
+                    <input className="mb-4 rounded-lg px-6 py-3 w-full border border-solid border-[#0DD3FA]" type="email" name="email" id="1" placeholder="Enter email..." required/>
                     <h1 className="mb-4 text-lg text-white">Your Password</h1>
-                    <input className="mb-4 rounded-lg px-6 py-3 w-4/5 border border-solid border-[#0DD3FA]" type="password" name="password" id="2" placeholder="Enter password..." required/>
-                    <input className="btn btn-primary text-white text-lg mb-4 w-4/5 bg-[#FFE72F] border-none" type="submit" name="" id="3" value="REGISTER"/>
+                    <input className="mb-8 rounded-lg px-6 py-3 w-full border border-solid border-[#0DD3FA]" type="password" name="password" id="2" placeholder="Enter password..." required/>
+                    <input className="btn btn-primary text-white text-lg mb-4 w-full bg-[#FFE72F] border-none" type="submit" name="" id="3" value="REGISTER"/>
                 </form>             
                 <p className="my-4 text-base font-medium text-white">Already Have an Account?<Link to="/login"><span className="text-[#FFE72F] underline text-lg font-bold"> Login Now</span></Link></p> 
                 {/* The "or" portion*/}

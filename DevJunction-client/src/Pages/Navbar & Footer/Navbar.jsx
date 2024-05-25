@@ -6,6 +6,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import { Link,NavLink } from "react-router-dom";
 import { AuthContext } from "../../contextProvider/AuthProvider";
 import logo from "../../assets/Logo.png";
+
 const Navbar = () => {
     const [open, setOpen] = useState(false)
     const { user, logOut } = useContext(AuthContext)
@@ -25,11 +26,10 @@ const Navbar = () => {
         <li className="text-base text-white font-semibold"><NavLink to={`/bidrequest?email=${user?.email}`} className={({ isActive, isPending }) =>isPending ? "pending" : isActive ? "text-[#0DD3FA]" : ""}>BID Request</NavLink></li>
         <li className="text-base text-white font-semibold"><NavLink to={`/postjob`} className={({ isActive, isPending }) =>isPending ? "pending" : isActive ? "text-[#0DD3FA]" : ""}>Post Job</NavLink></li>
         <li className="text-base text-white font-semibold"><NavLink to={`/bids?email=${user?.email}`} className={({ isActive, isPending }) =>isPending ? "pending" : isActive ? "text-[#0DD3FA]" : ""}>My Bids</NavLink></li>
-        <li className={'text-base text-white font-semibold'}><NavLink to='/login' className={({ isActive, isPending }) =>isPending ? "pending" : isActive ? "text-[#0DD3FA]" : ""}>Login</NavLink></li>
     </>
     
     return (
-        <nav className="flex flex-row h-24 justify-between items-center px-4 md:px-8 bg-[#080705]">
+        <nav className="flex flex-row h-24 justify-between items-center px-4 md:px-8 lg:px-16 bg-[#080705]">
             {/* When device is larger or equal to mid size device logo below will show left */}
             <div className="hidden md:block">
                 <div className=" flex flex-row items-center">
@@ -77,7 +77,6 @@ const Navbar = () => {
                         </>
                         :
                         <div className="flex flex-row items-center">
-                                <BsPersonCircle className="text-4xl text-[#0DD3FA] mr-4"></BsPersonCircle>
                                 <Link className="btn bg-[#FFE72F] border-none text-white font-semibold" to="/login">Log In</Link>
                         </div>                         
                     }

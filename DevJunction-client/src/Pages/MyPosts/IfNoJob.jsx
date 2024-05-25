@@ -1,7 +1,8 @@
-const IfNoJob = () => {
+/* eslint-disable react/prop-types */
+const IfNoJob = ({img}) => {
     return (
-        <div>
-            
+        <div className="my-28">
+            <img src={img} alt="" />
         </div>
     );
 };

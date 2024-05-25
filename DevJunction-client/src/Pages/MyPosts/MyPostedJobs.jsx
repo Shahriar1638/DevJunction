@@ -3,6 +3,7 @@ import { AuthContext } from "../../contextProvider/AuthProvider";
 import axios from "axios";
 import MyJobCards from "./MyJobCards";
 import IfNoJob from "./IfNoJob";
+import img from "../../assets/NNONOJOB.jpg"
 
 const MyPostedJobs = () => {
     const [myJobs, setMyJobs ] = useState([])
@@ -14,11 +15,10 @@ const MyPostedJobs = () => {
             setMyJobs(res.data);
         })
     }, [url])
-    console.log(myJobs)
     return (
         <div className="my-28">
             {
-                (myJobs.length === 0)? <IfNoJob></IfNoJob> : <div> 
+                (myJobs.length === 0)? <IfNoJob img={img}></IfNoJob> : <div> 
                     <h1 className="mx-2 text-5xl font-extrabold my-12 text-[#000080]">My Posted Jobs</h1>
                  {
                     myJobs.map(myjob => <MyJobCards key={myjob._id} myjob={myjob}></MyJobCards>

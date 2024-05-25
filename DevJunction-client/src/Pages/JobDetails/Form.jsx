@@ -76,7 +76,7 @@ const Form = ({email, buyerEmail, id, jobTitle }) => {
                     <h1 className="mb-4 text-lg font-semibold text-white">Buyer Email</h1>                               
                     <input className="mb-6 rounded-lg border-2 border-solid border-[#0DD3FA] px-6 py-3 w-full" type="email" name="productType" id="011" value={buyerEmail} readOnly/>                               
                 </div>
-                <input className="btn btn-primary md:col-span-2 mb-4 text-white w-full bg-[#FFE72F] border-none" type="submit" value="Bid on the project" disabled={buyerEmail === email ? true : false}/>         
+                <input className="btn btn-primary md:col-span-2 mb-4 text-white w-full bg-[#FFE72F] border-none" type="submit" value="Bid on the project"/>         
             </form> 
         </div>
     );

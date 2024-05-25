@@ -98,6 +98,18 @@ async function run() {
 
     // ------> BID data apis started <------//
 
+    //get bid requests by email
+    app.get('/bidrequest', async(req,res) => {
+      console.log(req.query.email);
+      console.log("Token: ", req.cookies.token)
+      let query = {};
+      if (req.query?.email) {
+          query = { buyerEmail: req.query.email }
+      }
+      const result = await biddersCollection.find(query).toArray();
+      res.send(result);
+    });
+    
     //Getting bidders info from server
     app.get('/bids', async(req,res) => {
       console.log(req.query.email);

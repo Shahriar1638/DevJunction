@@ -14,7 +14,8 @@ const PostJob = () => {
         e.preventDefault();
         console.log("clicked")
         const form = e.target;
-        const buyerEmail = email
+        const buyerEmail = email;
+        const imgurl = form.imgurl.value
         const maxp = form.maxprice.value
         const bidderEmail = ''
         const jobTitle = form.jobtitle.value
@@ -30,7 +31,7 @@ const PostJob = () => {
             day: 'numeric',
           });
         
-        const job = { deadline,category, priceRange, fullDescription,jobTitle,buyerEmail,bidderEmail }
+        const job = { deadline,category, priceRange, fullDescription,jobTitle,buyerEmail,bidderEmail,imgurl }
         console.log(job)
         fetch('https://dev-junction-server.vercel.app/jobs', {
                 method: 'POST',
@@ -80,6 +81,8 @@ const PostJob = () => {
                                 <option value="Graphics Design">Graphics Design</option>
                             </select>
                         </div>
+                        <h1 className="mb-4 text-lg font-semibold text-white ">Image URL</h1>    
+                        <input className="mb-4 rounded-lg border-2 border-solid border-[#0DD3FA] px-6 py-3 w-full" type="text" name="imgurl" id="104" placeholder="Your image link/url...." required/>
                         <h1 className="mb-4 text-lg font-semibold text-white ">Job Description</h1>
                         <textarea className="w-full border-2 border-solid border-[#0DD3FA] rounded-lg px-4 py-2" name="description" id="" cols="70" rows="10" placeholder="Describe the job in detail......."></textarea>
                     </div>                                                                 
