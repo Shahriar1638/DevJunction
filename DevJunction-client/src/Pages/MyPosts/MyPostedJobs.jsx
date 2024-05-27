@@ -8,7 +8,7 @@ import img from "../../assets/NNONOJOB.jpg"
 const MyPostedJobs = () => {
     const [myJobs, setMyJobs ] = useState([])
     const { user } = useContext(AuthContext)
-    const url = `https://dev-junction-server.vercel.app/myjobs?email=${user?.email}`
+    const url = `http://localhost:3000/myjobs?email=${user?.email}`
     useEffect(() => {
         axios.get(url, {withCredentials: true})
         .then(res => {

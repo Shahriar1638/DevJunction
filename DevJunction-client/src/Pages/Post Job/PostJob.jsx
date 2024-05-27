@@ -33,7 +33,7 @@ const PostJob = () => {
         
         const job = { deadline,category, priceRange, fullDescription,jobTitle,buyerEmail,bidderEmail,imgurl }
         console.log(job)
-        fetch('https://dev-junction-server.vercel.app/jobs', {
+        fetch('http://localhost:3000/jobs', {
                 method: 'POST',
                 headers: {
                     'content-type' : 'application/json'

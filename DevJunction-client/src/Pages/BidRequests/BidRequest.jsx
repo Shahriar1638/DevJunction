@@ -7,7 +7,7 @@ import IfNoJob from "../MyPosts/IfNoJob";
 const BidRequest = () => {
     const [bidRequests, setBidRequests ] = useState([])
     const { user } = useContext(AuthContext)
-    const url = `https://dev-junction-server.vercel.app/bidrequest?email=${user?.email}`
+    const url = `http://localhost:3000/bidrequest?email=${user?.email}`
     useEffect(() => {
         axios.get(url, {withCredentials: true})
         .then(res => {

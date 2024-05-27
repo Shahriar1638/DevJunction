@@ -22,8 +22,8 @@ const routes = createBrowserRouter([
                 element: <Home></Home>,
                 loader: () =>
                 Promise.all([
-                  fetch("https://dev-junction-server.vercel.app/category"),
-                  fetch("https://dev-junction-server.vercel.app/jobs"),
+                  fetch("http://localhost:3000/category"),
+                  fetch("http://localhost:3000/jobs"),
                 ]).then((responses) =>
                   Promise.all(responses.map((response) => response.json()))
                 ),
@@ -57,7 +57,7 @@ const routes = createBrowserRouter([
                 path: '/jobs/:id',
                 // element: <JobDetails></JobDetails>,
                 element: <PrivateRoute><JobDetails></JobDetails></PrivateRoute>,
-                loader: ({params}) => fetch(`https://dev-junction-server.vercel.app/jobs/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:3000/jobs/${params.id}`)
             },
             
         

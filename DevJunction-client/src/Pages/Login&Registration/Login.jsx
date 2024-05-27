@@ -26,7 +26,7 @@ const Login = () => {
                 setSuccess('Successfully Verified')
                 e.target.reset()
                 navigate(location?.state ? location.state : '/')
-                axios.post('https://dev-junction-server.vercel.app/jwt',user, {withCredentials: true})
+                axios.post('http://localhost:3000/jwt',user, {withCredentials: true})
                 .then(res => {
                     console.log("Axios Response data : ",res.data)
                     if (res.data.success){

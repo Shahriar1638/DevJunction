@@ -7,7 +7,7 @@ import axios from 'axios';
 const Form = ({email, buyerEmail, id, jobTitle }) => {
     const [bids, setBids ] = useState([])
     const { user } = useContext(AuthContext)
-    const url = `https://dev-junction-server.vercel.app/bids?email=${user?.email}`
+    const url = `http://localhost:3000/bids?id=${id}`
     useEffect(() => {
         axios.get(url, {withCredentials: true})
         .then(res => {
@@ -17,8 +17,9 @@ const Form = ({email, buyerEmail, id, jobTitle }) => {
     const handlePlaceBid = (e) =>{
         e.preventDefault();
         const form = e.target;
-        const price = `$${form.price.value}`
-        const status = 'Pending'
+        const jobTitle = form.jobTitle.value;
+        const price = form.price.value;
+        const status = 'Pending';
         const date = form.deadline.value;
         const inputDate = new Date(date);
         const deadline = inputDate.toLocaleDateString('en-US', {
@@ -26,38 +27,60 @@ const Form = ({email, buyerEmail, id, jobTitle }) => {
             month: 'long',
             day: 'numeric',
         });
-        const info = {price, email, buyerEmail, id, jobTitle, deadline, status}
-        console.log(info)
-        const alreadyBidded = bids.find((bid) => bid.id === id)
-        if (alreadyBidded){
-            return (
-                Swal.fire(
-                    'Already bidded',
-                    'You cannot bid twice',
-                    'warning'
-                )
-        )}
-        else{
-            fetch('https://dev-junction-server.vercel.app/bids', {
-                method: 'POST',
-                headers: {
-                    'content-type' : 'application/json'
-                },
-                body: JSON.stringify(info) 
-            })
-                .then(res => res.json())
-                .then(data =>{
-                        console.log(data)
-                        if (data.insertedId) {
+        const email = user.email;
+        const newInfo = {email, price, deadline, status}
+        // if the bid already is in bidders databasee
+        if(bids.length > 0){
+            const { sellersInfo } = bids[0]
+            console.log("Sellers Info:", sellersInfo)
+            const alreadyBidded = sellersInfo.find((info) => info.email === email)
+            console.log("Already bidded:", alreadyBidded)
+            if (alreadyBidded){
+                return (
+                    Swal.fire(
+                        'Already bidded',
+                        'You cannot bid twice',
+                        'warning'
+                    )
+            )}
+            else{
+                fetch(`http://localhost:3000/bids?id=${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'content-type' : 'application/json'
+                    },
+                    body: JSON.stringify(newInfo) 
+                })
+                    .then(res => res.json())
+                    .then(data =>{
+                        if (data.modifiedCount) {
                             Swal.fire(
                                 'Your bid placed',
                                 'You successfully bidded on this job',
                                 'success'
-                              ).then(() => {
+                            ).then(() => {
                                 form.reset();
                                 window.location.reload();
                             });
                         }})
+                }
+        // if the bid is not in bidders database
+        } else {
+            const sellersInfo = [newInfo]
+            const newEntry = { sellersInfo, buyerEmail , id , jobTitle }
+            axios.post('http://localhost:3000/bids', newEntry)
+                .then(res => {
+                    if (res.data.insertedId) {
+                        Swal.fire(
+                            'Your bid placed',
+                            'You successfully bidded on this job',
+                            'success'
+                        ).then(() => {
+                            form.reset();
+                            window.location.reload();
+                        });
+                    }
+                })
         }
         
     }
@@ -67,6 +90,8 @@ const Form = ({email, buyerEmail, id, jobTitle }) => {
             <h1 className="text-5xl font-extrabold text-[#000080] mb-12">Ready to Submit Your Bid? Complete the Form Below:</h1>
             <form onSubmit={handlePlaceBid} className="my-10 gap-10 px-8 rounded-xl bg-gradient-to-tr from-[#000080] to-[#0DD3FA] py-4">
                 <div className="">
+                    <h1 className="mb-4 text-lg font-semibold text-white">Job Title</h1>
+                    <input className="mb-4 rounded-lg border-2 border-solid border-[#0DD3FA] px-6 py-3 w-full" type="text" name="jobTitle" id="010" value={jobTitle} readOnly/>
                     <h1 className="mb-4 text-lg font-semibold text-white">Price</h1>
                     <input className="mb-4 rounded-lg border-2 border-solid border-[#0DD3FA] px-6 py-3 w-full" type="text" name="price" id="012" placeholder="Your offering price...." required/>     
                     <h1 className="mb-4 text-lg font-semibold text-white ">Deadline</h1>    

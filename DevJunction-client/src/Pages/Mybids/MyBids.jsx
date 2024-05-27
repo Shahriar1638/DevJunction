@@ -7,7 +7,7 @@ import axios from "axios";
 const MyBids = () => {
   const [bids, setBids ] = useState([])
   const { user } = useContext(AuthContext)
-  const url = `https://dev-junction-server.vercel.app/bids?email=${user?.email}`
+  const url = `http://localhost:3000/bids?email=${user?.email}`
   useEffect(() => {
       axios.get(url, {withCredentials: true})
       .then(res => {
@@ -38,7 +38,7 @@ const MyBids = () => {
                     <th>{info.buyerEmail}</th>
                     <th>{info.price}</th>
                     <th>{info.deadline}</th>
-                    <th>{info.status}   {info.status==="In progress"? <button>Complete</button>:<button>Cancel</button>}</th>
+                    <th>{info.status} {info.status==="In progress"? <button className="mr-4">Complete</button>:<button>Cancel</button>}</th>
                 </tr>
             </tbody>)
           }

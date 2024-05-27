@@ -33,18 +33,15 @@ async function run() {
     // ------> Recieve Data from server <------//
     const categoryCollection = client.db("DevJunctionDB").collection("Maincategory");
     const jobsCollection = client.db("DevJunctionDB").collection("Subcategory");
-    const biddersCollection = client.db("DevJunctionDB").collection("Bidders");
+    const biddersCollection = client.db("DevJunctionDB").collection("bidders2");
 
   // ------> JWT auth api <------//
     app.post('/jwt', async (req, res) => {
       const user = req.body;
-      console.log(user);
       const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
           expiresIn: '1h'
       });
-
-      res
-          .cookie('token', token, {
+      res.cookie('token', token, {
               httpOnly: true,
               secure: false, 
           })
@@ -100,8 +97,6 @@ async function run() {
 
     //get bid requests by email
     app.get('/bidrequest', async(req,res) => {
-      console.log(req.query.email);
-      console.log("Token: ", req.cookies.token)
       let query = {};
       if (req.query?.email) {
           query = { buyerEmail: req.query.email }
@@ -112,11 +107,9 @@ async function run() {
     
     //Getting bidders info from server
     app.get('/bids', async(req,res) => {
-      console.log(req.query.email);
-      console.log("Token: ", req.cookies.token)
       let query = {};
-      if (req.query?.email) {
-          query = { email: req.query.email }
+      if (req.query?.id) {
+          query = { id: req.query.id }
       }
       const result = await biddersCollection.find(query).toArray();
       res.send(result);
@@ -130,6 +123,19 @@ async function run() {
       res.send(result);
     });
     
+    //patch a bid
+    app.patch('/bids', async(req,res) => {
+      const id = req.query.id;
+      const info = req.body;
+      const filter = { id: id };
+      const updateDoc = {
+        $push: {
+          sellersInfo: info
+        },
+      };
+      const result = await biddersCollection.updateOne(filter, updateDoc);
+      res.send(result);
+    });
 
     //Publish Bids in server
     app.post('/bids', async(req,res) => {
